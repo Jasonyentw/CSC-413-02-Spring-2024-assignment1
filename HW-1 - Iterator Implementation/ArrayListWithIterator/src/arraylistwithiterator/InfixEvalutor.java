@@ -13,7 +13,7 @@ public class InfixEvalutor
         MyLList valueStack = new MyLList();
         
         double Answer = 0.0;
-        String notation;
+        char notation;
         for(int i = 0; i < tokens.length; i++)
         {
             if(tokens[i] == '(')
@@ -22,22 +22,39 @@ public class InfixEvalutor
             }
             else if(Character.isDigit(tokens[i]))
             {
-                char[] charArray = { tokens[i] };
-                valueStack.add(charArray);
+                System.err.println("*2");
+                valueStack.add(tokens[i]);
             }
             else if(tokens[i] == '+' || tokens[i] == '-' || tokens[i] == '*' || tokens[i] == '/')
             {
-                char[] charArray = { tokens[i] };
-                valueStack.add(charArray);
+                System.err.println("*3");
+                operatorStack.add(tokens[i]);
             }
             else if(tokens[i] == ')')
             {
-                notation = operatorStack.remove();
+                notation = (char) operatorStack.remove(operatorStack.getLength());
+                switch (notation) 
+                {
+                    case '+':
+                        System.out.println('1' + '2' - 48);
+                        break;
+                    case '-':
+                        
+                        break;
+                    case '*':
+                        
+                        break;
+                    case '/':
+                        
+                        break;
+                    default:
+                        break;
+                }
             }
             
         }
 
-        return 0.0;
+        return Answer;
     }
     public static void printout()
     {
