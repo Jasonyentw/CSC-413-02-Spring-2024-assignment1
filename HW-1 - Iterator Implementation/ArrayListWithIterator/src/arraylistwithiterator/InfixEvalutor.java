@@ -22,20 +22,25 @@ public class InfixEvalutor
             }
             else if(Character.isDigit(tokens[i]))
             {
+                System.err.println("*2");
                 double digitValue = Character.getNumericValue(tokens[i]);
                 valueStack.add(digitValue);
             }
             else if(tokens[i] == '+' || tokens[i] == '-' || tokens[i] == '*' || tokens[i] == '/')
             {
+                System.err.println("*3");
                 operatorStack.add(tokens[i]);
             }
             else if(tokens[i] == ')')
             {
                 notation = (char) operatorStack.remove(operatorStack.getLength());
+                double operand2 = (double) valueStack.remove(valueStack.getLength());
+                double operand1 = (double) valueStack.remove(valueStack.getLength());
                 switch (notation) 
                 {
                     case '+':
-                        Answer += (double)valueStack.remove(valueStack.getLength()) + (double)valueStack.remove(valueStack.getLength());
+                        Answer = operand1 + operand2;
+                        valueStack.add(Answer);
                         break;
                     case '-':
                         
@@ -53,7 +58,7 @@ public class InfixEvalutor
             
         }
 
-        return Answer;
+        return (double) valueStack.remove(valueStack.getLength());
     }
     public static void printout()
     {
