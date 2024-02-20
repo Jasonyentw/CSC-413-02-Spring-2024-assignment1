@@ -20,9 +20,9 @@ public class ExpressionDriver  {
         
         LL.printLinkedList();
         InfixEvalutor calculate = new InfixEvalutor();
-        System.out.println(calculate.evaluateInfix("(4+5) "));
+        calculate.printout();
+        System.out.println(" = " + calculate.evaluateInfix("(4+5)*(2+5)"));
         // here
-        System.out.println(LL.remove(LL.getLength()));
 
         System.out.println("Testing add to end: Add A, B, C, D");
         myList.add("A");

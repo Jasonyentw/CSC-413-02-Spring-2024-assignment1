@@ -1,18 +1,18 @@
 package arraylistwithiterator;
 import java.util.*;
 
-import javax.xml.validation.Validator;
 
 public class InfixEvalutor 
 {
     private static final String INFIX_EXPRESSION = "(a+b)*(c+d)";
     public static double evaluateInfix(String str)
     {
+        str = "(" + str + ")";
         char[] tokens = str.toCharArray(); 
         MyLList operatorStack = new MyLList();
         MyLList valueStack = new MyLList();
         
-        double Answer = 0.0;
+        double Value = 0.0;
         char notation;
         for(int i = 0; i < tokens.length; i++)
         {
@@ -22,38 +22,38 @@ public class InfixEvalutor
             }
             else if(Character.isDigit(tokens[i]))
             {
-                System.err.println("*2");
                 double digitValue = Character.getNumericValue(tokens[i]);
                 valueStack.add(digitValue);
             }
             else if(tokens[i] == '+' || tokens[i] == '-' || tokens[i] == '*' || tokens[i] == '/')
             {
-                System.err.println("*3");
                 operatorStack.add(tokens[i]);
             }
             else if(tokens[i] == ')')
             {
+                if(operatorStack.isEmpty())
+                    break;
                 notation = (char) operatorStack.remove(operatorStack.getLength());
                 double operand2 = (double) valueStack.remove(valueStack.getLength());
                 double operand1 = (double) valueStack.remove(valueStack.getLength());
                 switch (notation) 
                 {
                     case '+':
-                        Answer = operand1 + operand2;
-                        valueStack.add(Answer);
+                        Value = operand1 + operand2;
                         break;
                     case '-':
-                        
+                        Value = operand1 - operand2;
                         break;
                     case '*':
-                        
+                        Value = operand1 * operand2;
                         break;
                     case '/':
-                        
+                        Value = operand1 / operand2;
                         break;
                     default:
                         break;
                 }
+                valueStack.add(Value);
             }
             
         }
@@ -62,6 +62,6 @@ public class InfixEvalutor
     }
     public static void printout()
     {
-        System.out.println(INFIX_EXPRESSION);
+        System.out.printf(INFIX_EXPRESSION);
     }
 }
