@@ -127,3 +127,19 @@ These above two string expressions should be defined as `private static final`.
   - The `ExpressionDriver` adaptor class stated above should have a while loop that will:
     - Ask the user to enter values, either integer or double, for the 4 identifiers `a`, `b`, `c`, and `d`, which should be stored in the application.
     - Call the `evaluateInfix` and `evaluatePostfix` methods which, in turn, will use the user
+
+-provided values for each of the 4 identifiers (`a`, `b`, `c`, `d`), assign the values to each identifier, compute the final value for that expression, and print the computed value in the following format for the two expression types:
+      ```java
+      “Value of infix string (a+b)*(c+d) with a=10, b=3, c=3, d=4 is 52”
+      “Value of postfix string ac−b^d+ with a=10, b=3, c=3, d=4 is 68”
+      ```
+    - The while loop, in each of its iterations, should ask the user if computing is needed. If the user responds “yes”, identifier values will be solicited from the user, and both expressions are computed. If, however, the user chooses to answer “no”, the program should be ended.
+
+
+### Contributing
+
+Feel free to contribute to this project.
+
+### License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
