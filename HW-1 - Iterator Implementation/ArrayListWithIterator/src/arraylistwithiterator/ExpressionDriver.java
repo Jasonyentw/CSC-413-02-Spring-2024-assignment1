@@ -20,7 +20,7 @@ public class ExpressionDriver  {
         
         LL.printLinkedList();
         InfixEvalutor calculate = new InfixEvalutor();
-        System.out.println(calculate.evaluateInfix("(4+5)"));
+        System.out.println(calculate.evaluateInfix("(4+5) "));
         // here
         System.out.println(LL.remove(LL.getLength()));
 
