@@ -2,38 +2,46 @@ package arraylistwithiterator;
 
 import java.util.Stack;
 
-public class PostfixEvaluator 
+public class InfixEvaluator 
 {
-    private static final String POSTFIX_EXPRESSION = "ac-b^d+";
+    private static final String INFIX_EXPRESSION = "(a+b)*(c+d)";
     private static double a;
     private static double b;
     private static double c;
     private static double d;
 
-    PostfixEvaluator()
+    InfixEvaluator()
     {
-        PostfixEvaluator.a = 0;
-        PostfixEvaluator.b = 0;
-        PostfixEvaluator.c = 0;
-        PostfixEvaluator.d = 0;
+        InfixEvaluator.a = 0;
+        InfixEvaluator.b = 0;
+        InfixEvaluator.c = 0;
+        InfixEvaluator.d = 0;
     }
 
-    PostfixEvaluator(double a, double b, double c, double d)
+    InfixEvaluator(double a, double b, double c, double d)
     {
-        PostfixEvaluator.a = a;
-        PostfixEvaluator.b = b;
-        PostfixEvaluator.c = c;
-        PostfixEvaluator.d = d;
+        InfixEvaluator.a = a;
+        InfixEvaluator.b = b;
+        InfixEvaluator.c = c;
+        InfixEvaluator.d = d;
     }
-
-    public static double evaluatePostfix(String str)
+    public static double evaluateInfix(String str) 
     {
+        str = "(" + str + ")";
         char[] tokens = str.toCharArray();
+        Stack<Character> operatorStack = new Stack<>();
         Stack<Double> valueStack = new Stack<>();
 
-        for (int i = 0; i < tokens.length; i++)
+        double result = 0.0;
+        char notation;
+
+        for (int i = 0; i < tokens.length; i++) 
         {
-            if(Character.isLetter(tokens[i]))
+            if (tokens[i] == '(') 
+            {
+                continue;
+            } 
+            else if (Character.isLetter(tokens[i])) 
             {
                 switch (tokens[i]) 
                 {
@@ -52,13 +60,21 @@ public class PostfixEvaluator
                     default:
                         break;
                 }
-            }
-            else if(tokens[i] == '+' || tokens[i] == '-' || tokens[i] == '*' || tokens[i] == '/' || tokens[i] == '^')
+            } 
+            else if (tokens[i] == '+' || tokens[i] == '-' || tokens[i] == '*' || tokens[i] == '/') 
             {
-                double result = 0.0;
+                operatorStack.push(tokens[i]);
+            } 
+            else if (tokens[i] == ')') 
+            {
+                if (operatorStack.isEmpty()) 
+                {
+                    break;
+                }
+                notation = operatorStack.pop();
                 double operand2 = valueStack.pop();
                 double operand1 = valueStack.pop();
-                switch (tokens[i]) 
+                switch (notation) 
                 {
                     case '+':
                         result = operand1 + operand2;
@@ -77,7 +93,7 @@ public class PostfixEvaluator
                     default:
                         break;
                 }
-                valueStack.add(result);
+                valueStack.push(result);
             }
         }
 
@@ -86,6 +102,6 @@ public class PostfixEvaluator
 
     public static void printout() 
     {
-        System.out.printf(POSTFIX_EXPRESSION);
+        System.out.printf(INFIX_EXPRESSION);
     }
 }

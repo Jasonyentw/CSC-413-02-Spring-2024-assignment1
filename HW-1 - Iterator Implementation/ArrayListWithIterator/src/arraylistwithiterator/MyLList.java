@@ -12,7 +12,7 @@ import java.util.*;
  *
  * @author kmehta
  */
-public class MyLList < E extends Comparable < ? super E> > implements ListInterface<E> {
+public class MyLList < E extends Comparable < ? super E> > implements ListWithIteratorInterface<E> {
  
     private boolean integrityOK;
     private ListNode firstNode; // reference to first node of the list
@@ -156,7 +156,7 @@ public class MyLList < E extends Comparable < ? super E> > implements ListInterf
         Comparable[] arr = this.toArray();
         
         E element = null;
-        if((i > 0) && (i < arr.length)) {
+        if((i > 0) && (i <= arr.length)) {
             element = (E) arr[i - 1];
         }
 
@@ -206,7 +206,7 @@ public class MyLList < E extends Comparable < ? super E> > implements ListInterf
         } else {
          
             System.out.println(position + ": is out of range of the list with size: " + numberOfEntries);
-            
+
         }// end if
         
         return result; // return removed entry, or
@@ -350,6 +350,63 @@ public class MyLList < E extends Comparable < ? super E> > implements ListInterf
         }
   
     } // end QueueNode    
+
+    public Iterator<E> getIterator()
+	{
+		return new IteratorForMyLList();
+	} // end getIterator
+
+	public Iterator<E> iterator()
+	{
+		return getIterator();
+	} // end iterator
+
+    private class IteratorForMyLList implements Iterator<E>
+	{
+        private int     nextPosition;  // Position of next entry in the iteration 
+		private boolean wasNextCalled; // Needed by remove
+
+		private IteratorForMyLList()
+		{
+			nextPosition = 1;
+			wasNextCalled = false;
+		} // end default constructor
+
+		public boolean hasNext()
+		{
+			return nextPosition <= getLength();
+		} // end hasNext
+
+		public E next()
+		{
+			if (hasNext())
+			{
+				wasNextCalled = true;
+				E nextEntry = getEntry(nextPosition);
+				nextPosition++; // Advance iterator
+
+				return nextEntry;
+			} // end if
+			else
+				throw new NoSuchElementException("Illegal call to next();" +
+						"iterator is after end of list.");
+		} // end next
+
+		public void remove()
+		{
+			if (wasNextCalled)
+			{
+				// nextPosition was incremented by the call to next, so it 
+				// is 1 more than the position number of the entry to be removed
+				nextPosition--;  // Index of next entry in iteration
+				MyLList.this.remove(nextPosition);
+				wasNextCalled = false;	// Reset flag
+			} // end if
+			else
+				throw new IllegalStateException("Illegal call to remove(); " +
+						"next() was not called.");
+		} // end remove
+    }
     
 }// end MyLList
 
