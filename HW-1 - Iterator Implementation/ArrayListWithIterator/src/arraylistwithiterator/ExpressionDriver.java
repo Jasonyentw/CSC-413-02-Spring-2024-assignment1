@@ -1,3 +1,11 @@
+/*************************************************
+File: ExpressionDriver.java
+By: Chan-Chun Yen
+Date: 21 Feb
+Usage: Java
+System: Any
+Description: Test MyLList and Expression
+*************************************************/
 package arraylistwithiterator;
 
 import java.util.Scanner;
@@ -78,23 +86,23 @@ public class ExpressionDriver
             InfixEvaluator infix = new InfixEvaluator(a, b, c, d);
             PostfixEvaluator postfix = new PostfixEvaluator(a, b, c, d);
 
-            System.out.printf("Value of infix string (a+b)*(c+d) with a=%.2f, b=%.2f, c=%.2f, d=%.2f is %.2f%n",
+            System.out.printf("\nValue of infix string (a+b)*(c+d) with a=%.2f, b=%.2f, c=%.2f, d=%.2f is %.2f%n",
             a, b, c, d, infix.evaluateInfix("(a+b)*(c+d)"));
 
-            System.out.printf("Value of postfix string ac-b^d+ with a=%.2f, b=%.2f, c=%.2f, d=%.2f is %.2f%n",
+            System.out.printf("\nValue of postfix string ac-b^d+ with a=%.2f, b=%.2f, c=%.2f, d=%.2f is %.2f%n",
             a, b, c, d, postfix.evaluatePostfix("ac-b^d+"));
 
-            System.out.print("Do you want to continue? (yes/no): ");
+            System.out.print("\nDo you want to continue? (yes/no): ");
             String userResponse = scanner.next().toLowerCase();
 
             if (userResponse.equals("no")) 
             {
-                System.out.println("Program ended.");
+                System.out.println("\nProgram ended.");
                 break;
             } 
             else if (!userResponse.equals("yes")) 
             {
-                System.out.println("Invalid input. Program will continue.");
+                System.out.println("\nInvalid input. Program will continue.");
             }
         }
 

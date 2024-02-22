@@ -1,3 +1,11 @@
+/*************************************************
+File: InfixEvaluator.java
+By: Chan-Chun Yen
+Date: 21 Feb
+Usage: Java
+System: Any
+Description: Calculate in Infix
+*************************************************/
 package arraylistwithiterator;
 
 import java.util.Stack;
@@ -27,8 +35,8 @@ public class InfixEvaluator
     }
     public static double evaluateInfix(String str) 
     {
-        str = "(" + str + ")";
-        char[] tokens = str.toCharArray();
+        str = "(" + str + ")"; // Make sure equation is in the brackets
+        char[] tokens = str.toCharArray(); // Turn string to char arry
         Stack<Character> operatorStack = new Stack<>();
         Stack<Double> valueStack = new Stack<>();
 
@@ -41,7 +49,7 @@ public class InfixEvaluator
             {
                 continue;
             } 
-            else if (Character.isLetter(tokens[i])) 
+            else if (Character.isLetter(tokens[i])) // push the identifier to the valuestack
             {
                 switch (tokens[i]) 
                 {
@@ -62,10 +70,11 @@ public class InfixEvaluator
                 }
             } 
             else if (tokens[i] == '+' || tokens[i] == '-' || tokens[i] == '*' || tokens[i] == '/') 
+            // push notation to the operatorstack
             {
                 operatorStack.push(tokens[i]);
             } 
-            else if (tokens[i] == ')') 
+            else if (tokens[i] == ')') // pop out operands and a operator to calcualte when detecting ) 
             {
                 if (operatorStack.isEmpty()) 
                 {
@@ -93,11 +102,11 @@ public class InfixEvaluator
                     default:
                         break;
                 }
-                valueStack.push(result);
+                valueStack.push(result); // push result to the stack
             }
         }
 
-        return valueStack.pop();
+        return valueStack.pop(); 
     }
 
     public static void printout() 

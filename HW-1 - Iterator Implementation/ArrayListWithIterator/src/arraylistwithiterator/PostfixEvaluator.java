@@ -1,3 +1,11 @@
+/*************************************************
+File: PostfixEvaluator.java
+By: Chan-Chun Yen
+Date: 21 Feb
+Usage: Java
+System: Any
+Description: Calculate in Postfix
+*************************************************/
 package arraylistwithiterator;
 
 import java.util.Stack;
@@ -28,12 +36,12 @@ public class PostfixEvaluator
 
     public static double evaluatePostfix(String str)
     {
-        char[] tokens = str.toCharArray();
+        char[] tokens = str.toCharArray(); // Turn string to char arry
         Stack<Double> valueStack = new Stack<>();
 
         for (int i = 0; i < tokens.length; i++)
         {
-            if(Character.isLetter(tokens[i]))
+            if(Character.isLetter(tokens[i])) // push the identifier to the valuestack
             {
                 switch (tokens[i]) 
                 {
@@ -53,7 +61,8 @@ public class PostfixEvaluator
                         break;
                 }
             }
-            else if(tokens[i] == '+' || tokens[i] == '-' || tokens[i] == '*' || tokens[i] == '/' || tokens[i] == '^')
+            else if(tokens[i] == '+' || tokens[i] == '-' || tokens[i] == '*' || tokens[i] == '/' || tokens[i] == '^') 
+            // calculate when happen to the notation
             {
                 double result = 0.0;
                 double operand2 = valueStack.pop();
@@ -77,7 +86,7 @@ public class PostfixEvaluator
                     default:
                         break;
                 }
-                valueStack.add(result);
+                valueStack.add(result); // push result to the stack
             }
         }
 
